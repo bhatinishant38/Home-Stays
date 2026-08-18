@@ -1,0 +1,12 @@
+<div class="mt-2">
+  <form action="/favourites" method="post">
+    <button
+      type="submit"
+      class="inline-flex items-center rounded-full bg-rose-500 px-4 py-2 text-sm font-semibold text-white shadow-sm transition duration-300 hover:bg-rose-600"
+    >
+      <span class="mr-2 text-base">♡</span>
+      Add to Favourite
+    </button>
+    <input type="hidden" name="id" value="<%= home._id %>" />
+  </form>
+</div>

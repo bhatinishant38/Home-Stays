@@ -1,0 +1,76 @@
+<header class="border-b border-white/20 bg-gradient-to-r from-rose-500 via-red-500 to-rose-600 text-white shadow-[0_10px_30px_-15px_rgba(0,0,0,0.45)]">
+  <nav class="mx-auto max-w-7xl px-4 py-3 sm:px-6 lg:px-8">
+    <div class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+      <div class="flex items-center justify-between gap-3">
+        <a href="/" class="flex items-center gap-2 rounded-full bg-white/15 px-4 py-2 backdrop-blur-sm transition duration-300 hover:bg-white/25">
+          <span class="text-lg font-bold tracking-wide">Airbnb</span>
+        </a>
+      </div>
+
+      <ul class="flex flex-wrap items-center gap-2 text-sm font-medium">
+        <% if (isLoggedIn) { %>
+          <% if (user && user.userType ==="guest"){  %>
+            <li>
+              <a href="/homes"
+                class="<%= currentPage === 'homes' ? 'bg-white text-rose-600' : 'bg-white/10 hover:bg-white/20' %> rounded-full px-4 py-2 transition duration-300">
+                Homes List
+              </a>
+            </li>
+
+            <li>
+              <a href="/favourites"
+                class="<%= currentPage === 'favourites' ? 'bg-white text-rose-600' : 'bg-white/10 hover:bg-white/20' %> rounded-full px-4 py-2 transition duration-300">
+                Favourites
+              </a>
+            </li>
+
+            <li>
+              <a href="/bookings"
+                class="<%= currentPage === 'bookings' ? 'bg-white text-rose-600' : 'bg-white/10 hover:bg-white/20' %> rounded-full px-4 py-2 transition duration-300">
+                Bookings
+              </a>
+            </li>
+          <% } else { %>
+            <li>
+              <a href="/host/host-home-list"
+                class="<%= currentPage === 'Host Homes' ? 'bg-white text-rose-600' : 'bg-white/10 hover:bg-white/20' %> rounded-full px-4 py-2 transition duration-300">
+                Host Homes
+              </a>
+            </li>
+
+            <li>
+              <a href="/host/add-home"
+                class="<%= currentPage === 'addhome' ? 'bg-white text-rose-600' : 'bg-white/10 hover:bg-white/20' %> rounded-full px-4 py-2 transition duration-300">
+                Add Home
+              </a>
+            </li>
+          <% } %>
+        <% } %>
+
+        <% if (!isLoggedIn) { %>
+          <li>
+            <a href="/auth/login"
+              class="<%= currentPage === 'login' ? 'bg-white text-rose-600' : 'bg-white/10 hover:bg-white/20' %> rounded-full px-4 py-2 transition duration-300">
+              Log In
+            </a>
+          </li>
+
+          <li>
+            <a href="/auth/signup"
+              class="<%= currentPage === 'signup' ? 'bg-white text-rose-600' : 'bg-white/10 hover:bg-white/20' %> rounded-full px-4 py-2 transition duration-300">
+              Sign Up
+            </a>
+          </li>
+        <% } else { %>
+          <li>
+            <form action="/auth/logout" method="post">
+              <button type="submit" class="rounded-full bg-white/10 px-4 py-2 transition duration-300 hover:bg-white/20">
+                Logout
+              </button>
+            </form>
+          </li>
+        <% } %>
+      </ul>
+    </div>
+  </nav>
+</header>

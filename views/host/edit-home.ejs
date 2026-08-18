@@ -1,0 +1,26 @@
+<%- include('../partials/head') %>
+  </head>
+  <body class="bg-slate-50 text-slate-700">
+    <%- include('../partials/nav') %>
+    <main class="mx-auto max-w-3xl px-4 py-8 sm:px-6 lg:px-8">
+      <div class="overflow-hidden rounded-[32px] border border-slate-200 bg-white shadow-[0_20px_45px_-20px_rgba(15,23,42,0.35)]">
+        <div class="bg-gradient-to-r from-rose-50 to-white px-6 py-8 sm:px-8">
+          <p class="mb-2 text-sm font-semibold uppercase tracking-[0.3em] text-rose-500">Host panel</p>
+          <h1 class="text-3xl font-bold text-slate-800 sm:text-4xl"><%= editing ? "Edit" : "Register" %> your home on Airbnb</h1>
+          <p class="mt-3 text-sm text-slate-600 sm:text-base">Update your listing details and share a polished presentation with guests.</p>
+        </div>
+
+        <form action="/host/<%= editing ? 'edit-home' : 'add-home' %>" method="POST" enctype="multipart/form-data" class="space-y-4 p-6 sm:p-8">
+          <input type="hidden" name="id" value="<%= editing ? home._id : '' %>">
+          <input type="text" name="houseName" value="<%= editing ? home.houseName : '' %>" placeholder="Enter your house name" class="w-full rounded-2xl border border-slate-200 px-4 py-3 text-slate-700 outline-none transition focus:border-rose-400 focus:ring-2 focus:ring-rose-200" />
+          <input type="text" name="price" value="<%= editing ? home.price : '' %>" placeholder="Price per night" class="w-full rounded-2xl border border-slate-200 px-4 py-3 text-slate-700 outline-none transition focus:border-rose-400 focus:ring-2 focus:ring-rose-200" />
+          <input type="text" name="location" value="<%= editing ? home.location : '' %>" placeholder="Location" class="w-full rounded-2xl border border-slate-200 px-4 py-3 text-slate-700 outline-none transition focus:border-rose-400 focus:ring-2 focus:ring-rose-200" />
+          <input type="text" name="rating" value="<%= editing ? home.rating : '' %>" placeholder="Rating" class="w-full rounded-2xl border border-slate-200 px-4 py-3 text-slate-700 outline-none transition focus:border-rose-400 focus:ring-2 focus:ring-rose-200" />
+          <input type="file" name="photo" multiple accept="image/jpg,image/jpeg,image/png" class="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-700 transition focus:border-rose-400 focus:outline-none focus:ring-2 focus:ring-rose-200 file:mr-4 file:rounded-full file:border-0 file:bg-rose-500 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white file:hover:bg-rose-600" />
+          <textarea name="description" placeholder="Describe your home here" class="min-h-32 w-full rounded-2xl border border-slate-200 px-4 py-3 text-slate-700 outline-none transition focus:border-rose-400 focus:ring-2 focus:ring-rose-200"><%= editing ? home.description : '' %></textarea>
+          <input type="submit" value="<%= editing ? 'Update Home' : 'Add Home' %>" class="w-full rounded-full bg-rose-500 px-4 py-3 text-sm font-semibold text-white transition duration-300 hover:bg-rose-600" />
+        </form>
+      </div>
+    </main>
+  </body>
+</html>
