@@ -1,6 +1,6 @@
-# Airbnb Clone
+# Home Stay Clone
 
-A full-stack web application that replicates core features of Airbnb, built with Node.js, Express.js, MongoDB, and EJS. Users can browse properties, create listings as hosts, manage bookings, and maintain favorites.
+A full-stack web application that replicates core features of Home Stay, built with Node.js, Express.js, MongoDB, and EJS. Users can browse properties, create listings as hosts, manage bookings, and maintain favorites.
 
 ## 🌟 Features
 
@@ -46,7 +46,7 @@ A full-stack web application that replicates core features of Airbnb, built with
 ## 📁 Project Structure
 
 ```
-Airbnb/
+Home Stay/
 ├── app.js                     # Application entry point
 ├── package.json               # Dependencies and scripts
 ├── controllers/               # Route handlers
@@ -103,7 +103,7 @@ Airbnb/
 
 ```bash
 git clone <repository-url>
-cd Airbnb
+cd Home Stay
 ```
 
 2. **Install dependencies**
