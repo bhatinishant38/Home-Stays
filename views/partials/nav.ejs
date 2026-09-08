@@ -7,12 +7,8 @@
         </a>
       </div>
 
-      <details class="relative md:static">
-        <summary class="flex h-10 w-10 cursor-pointer list-none items-center justify-center rounded-full bg-white/15 text-xl transition hover:bg-white/25 md:hidden" aria-label="Open navigation menu">
-          <span aria-hidden="true">&#9776;</span>
-        </summary>
-
-      <ul class="navbar-links absolute right-0 top-14 z-10 hidden min-w-52 flex-col gap-2 rounded-2xl bg-rose-600 p-3 text-sm font-medium shadow-xl group-open:flex md:static md:flex md:min-w-0 md:flex-row md:items-center md:rounded-none md:bg-transparent md:p-0 md:shadow-none">
+      <!-- Desktop Menu (hidden below 640px) -->
+      <ul class="hidden sm:flex text-sm font-medium items-center gap-3">
         <% if (isLoggedIn) { %>
           <% if (user && user.userType ==="guest"){  %>
             <li>
@@ -76,7 +72,82 @@
           </li>
         <% } %>
       </ul>
-      </details>
+
+      <!-- Mobile Burger Menu Button (visible below 640px) -->
+      <button id="mobileMenuBtn" class="sm:hidden p-2 rounded-lg bg-white/10 hover:bg-white/20 transition duration-300">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Menu (hidden by default, shown on burger click) -->
+    <div id="mobileMenu" class="hidden sm:hidden flex-col gap-3 mt-4 pb-4">
+      <% if (isLoggedIn) { %>
+        <% if (user && user.userType ==="guest"){  %>
+          <a href="/homes"
+            class="<%= currentPage === 'homes' ? 'bg-white text-rose-600' : 'bg-white/10 hover:bg-white/20' %> block rounded-full px-4 py-2 text-sm font-medium transition duration-300">
+            Homes List
+          </a>
+
+          <a href="/favourites"
+            class="<%= currentPage === 'favourites' ? 'bg-white text-rose-600' : 'bg-white/10 hover:bg-white/20' %> block rounded-full px-4 py-2 text-sm font-medium transition duration-300">
+            Favourites
+          </a>
+
+          <a href="/bookings"
+            class="<%= currentPage === 'bookings' ? 'bg-white text-rose-600' : 'bg-white/10 hover:bg-white/20' %> block rounded-full px-4 py-2 text-sm font-medium transition duration-300">
+            Bookings
+          </a>
+        <% } else { %>
+          <a href="/host/host-home-list"
+            class="<%= currentPage === 'Host Homes' ? 'bg-white text-rose-600' : 'bg-white/10 hover:bg-white/20' %> block rounded-full px-4 py-2 text-sm font-medium transition duration-300">
+            Host Homes
+          </a>
+
+          <a href="/host/add-home"
+            class="<%= currentPage === 'addhome' ? 'bg-white text-rose-600' : 'bg-white/10 hover:bg-white/20' %> block rounded-full px-4 py-2 text-sm font-medium transition duration-300">
+            Add Home
+          </a>
+        <% } %>
+      <% } %>
+
+      <% if (!isLoggedIn) { %>
+        <a href="/auth/login"
+          class="<%= currentPage === 'login' ? 'bg-white text-rose-600' : 'bg-white/10 hover:bg-white/20' %> block rounded-full px-4 py-2 text-sm font-medium transition duration-300">
+          Log In
+        </a>
+
+        <a href="/auth/signup"
+          class="<%= currentPage === 'signup' ? 'bg-white text-rose-600' : 'bg-white/10 hover:bg-white/20' %> block rounded-full px-4 py-2 text-sm font-medium transition duration-300">
+          Sign Up
+        </a>
+      <% } else { %>
+        <form action="/auth/logout" method="post" class="w-full">
+          <button type="submit" class="w-full text-left rounded-full bg-white/10 px-4 py-2 text-sm font-medium transition duration-300 hover:bg-white/20">
+            Logout
+          </button>
+        </form>
+      <% } %>
     </div>
   </nav>
+
+  <script>
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    mobileMenuBtn.addEventListener('click', function() {
+      mobileMenu.classList.toggle('hidden');
+      mobileMenu.classList.toggle('flex');
+    });
+
+    // Close menu when a link is clicked
+    const menuLinks = mobileMenu.querySelectorAll('a');
+    menuLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        mobileMenu.classList.add('hidden');
+        mobileMenu.classList.remove('flex');
+      });
+    });
+  </script>
 </header>
