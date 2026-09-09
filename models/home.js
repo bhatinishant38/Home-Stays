@@ -28,7 +28,7 @@ const homeSchema = mongoose.Schema({
 //   await favourites.deleteMany({ houseId: homeId });
 // });
 homeSchema.pre("findOneAndDelete", async function () {
-  console.log("came to pre hook while deleting a home");
+  // console.log("came to pre hook while deleting a home");
   const homeId = this.getQuery()._id;
   await User.updateMany({ favourites: homeId }, { $pull: { favourites: homeId } });
 });

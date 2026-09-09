@@ -14,7 +14,7 @@ exports.getAddHome = (req, res, next) => {
 exports.postAddHome = (req, res, next) => {
   const { houseName, price, location, rating, description } = req.body;
 
-  console.log(req.file);
+  // console.log(req.file);
   if (!req.file) {
     return res.status(422).send("No image provided");
   }
@@ -28,9 +28,9 @@ exports.postAddHome = (req, res, next) => {
     photo,
     description,
   });
-  console.log(home);
+  // console.log(home);
   home.save().then(() => {
-    console.log("Home Saved Successfully");
+    // console.log("Home Saved Successfully");
   });
   res.render("host/home-Added", {
     pageTitle: "Home Added SuccessFully",
@@ -42,7 +42,7 @@ exports.postAddHome = (req, res, next) => {
 
 exports.getHostHomes = (req, res, next) => {
   Home.find().then((registeredHomes) => {
-    console.log(registeredHomes);
+    // console.log(registeredHomes);
     res.render("host/host-home-list", {
       registeredHomes: registeredHomes,
       pageTitle: "Host Home List",
@@ -59,10 +59,10 @@ exports.getEditHome = (req, res, next) => {
 
   Home.findById(homeId).then((home) => {
     if (!home) {
-      console.log("Home not found for editing.");
+      // console.log("Home not found for editing.");
       return res.redirect("/host/host-home-list");
     }
-    console.log(homeId, editing, home);
+    // console.log(homeId, editing, home);
     res.render("host/edit-home", {
       home: home,
       editing: editing,
@@ -86,7 +86,7 @@ exports.postEditHome = (req, res, next) => {
       if (req.file) {
         fs.unlink(home.photo, (err) => {
           if (err) {
-            console.log("Error while deleting file", err);
+            // console.log("Error while deleting file", err);
           }
         });
         home.photo = req.file.path;
@@ -94,14 +94,14 @@ exports.postEditHome = (req, res, next) => {
       home
         .save()
         .then((result) => {
-          console.log("Home Updated", result);
+          // console.log("Home Updated", result);
         })
         .catch((error) => {
-          console.log("Error while  Updating", error);
+          // console.log("Error while  Updating", error);
         });
     })
     .catch((error) => {
-      console.log("Error while finding home ", error);
+      // console.log("Error while finding home ", error);
     });
 
   res.redirect("/host/host-home-list");
@@ -109,12 +109,12 @@ exports.postEditHome = (req, res, next) => {
 
 exports.postDeleteHome = (req, res, next) => {
   const homeId = req.params.homeId;
-  console.log("delete this", homeId);
+  // console.log("delete this", homeId);
   Home.findOneAndDelete({ _id: homeId }) //  Home.findOneAndDelete(homeId)
     .then(() => {
       res.redirect("/host/host-home-list");
     })
     .catch((error) => {
-      console.log("Error while deleting 67", error);
+      // console.log("Error while deleting 67", error);
     });
 };

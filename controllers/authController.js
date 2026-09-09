@@ -12,7 +12,7 @@ exports.getLogin = (req, res, next) => {
 };
 
 exports.postLogin = async (req, res, next) => {
-  console.log(req.body);
+  // console.log(req.body);
   const { email, password } = req.body;
   const user = await User.findOne({ email });
   if (!user) {
@@ -121,7 +121,7 @@ exports.postSignup = [
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-      console.log(errors.array());
+      // console.log(errors.array());
       return res.status(422).render("Auth/signup", {
         pageTitle: "Sign Up",
         currentPage: "signup",
@@ -138,7 +138,7 @@ exports.postSignup = [
       });
     }
 
-    console.log(req.body);
+    // console.log(req.body);
 
     bcrypt.hash(password, 12).then((hashedPassword) => {
       const user = new User({
@@ -154,7 +154,7 @@ exports.postSignup = [
           res.redirect("/auth/login");
         })
         .catch((err) => {
-          console.log(errors.array());
+          // console.log(errors.array());
           return res.status(422).render("Auth/signup", {
             pageTitle: "Sign Up",
             currentPage: "signup",

@@ -2,7 +2,7 @@ const Home = require("../models/home");
 const User = require("../models/user");
 
 exports.getIndex = (req, res, next) => {
-  console.log("Session value ", req.session);
+  // console.log("Session value ", req.session);
   Home.find().then((registeredHomes) => {
     res.render("store/index", {
       registeredHomes: registeredHomes,
@@ -39,7 +39,7 @@ exports.getHomeDetails = (req, res, next) => {
   const homeId = req.params.homeId;
   Home.findById(homeId).then((home) => {
     if (!home) {
-      console.log("home Not Found");
+      // console.log("home Not Found");
       res.redirect("/homes");
     } else {
       res.render("store/home-detail", {
